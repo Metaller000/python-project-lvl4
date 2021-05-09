@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "hexlet-code"
+version = "0.1.0"
+description = ""
+authors = ["Metaller <metaller7440326@gmail.com>"]
+packages = [
+  { include = "task_manager" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+Django = "^3.2"
+python-dotenv = "^0.17.1"
+
+[tool.poetry.dev-dependencies]
+autopep8 = "^1.5.5"
+flake8 = "^3.8.4"
+pytest = "^6.2.2"
+requests-mock = "^1.8.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
