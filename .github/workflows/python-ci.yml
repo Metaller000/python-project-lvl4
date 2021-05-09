@@ -36,9 +36,8 @@ jobs:
         run: |
           make install
 
-      - name: Django init
-        run: |
-            make runserver
+      - name: Django init DB
+        run: |            
             make migrate
 
       - name: Run linter
