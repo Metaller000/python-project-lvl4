@@ -7,12 +7,6 @@ update:
 build:
 	poetry build
 
-package-install:
-	python3 -m pip install --user dist/*.whl
-
-publish:
-	poetry publish --dry-run
-		
 lint:
 	poetry run flake8 task_manager
 
@@ -22,7 +16,8 @@ test:
 	coverage xml
 
 migrate:
-	poetry run python manage.py migrate
-
+	poetry run python3 manage.py makemigrations
+	poetry run python3 manage.py migrate
+	
 runserver:
 	poetry run python manage.py runserver

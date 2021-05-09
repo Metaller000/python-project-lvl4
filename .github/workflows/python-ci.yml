@@ -35,7 +35,12 @@ jobs:
       - name: Install package
         run: |
           make install
-          
+
+      - name: Django init
+        run: |
+            make runserver
+            make migrate
+
       - name: Run linter
         run: make lint
 
