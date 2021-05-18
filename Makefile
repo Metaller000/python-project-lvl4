@@ -11,9 +11,7 @@ lint:
 	poetry run flake8 task_manager
 
 test:
-	coverage run --source='.' manage.py test
-	coverage report
-	coverage xml
+	./manage.py test
 
 migrate:
 	poetry run python3 manage.py makemigrations

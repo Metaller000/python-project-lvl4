@@ -1,3 +1,2 @@
 poetry>=1.2.3
 gunicorn=>20.0.4
-python-dotenv=>2.8.1
