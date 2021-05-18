@@ -1,3 +1,4 @@
+poetry
 django
 gunicorn
 python-dotenv
