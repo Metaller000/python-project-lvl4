@@ -1,2 +1,2 @@
-poetry>=1.2.3
-gunicorn=>20.0.4
+poetry
+gunicorn
