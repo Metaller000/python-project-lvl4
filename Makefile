@@ -23,5 +23,8 @@ runserver:
 lang_compale:
 	poetry run django-admin compilemessages
 	
-run: lang_compale migrate runserver
+run: message_update lang_compale migrate runserver
 
+message_update:
+	poetry run python3 manage.py makemessages --all
+	

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block title %}Login{% endblock %} 
+
+{% block content %}
+<h1 class="my-4">{% trans 'Enter' %}</h1>
+<form method="post">
+  {% csrf_token %}    
+  <div class="form-group">
+    <label for="id_username">{% trans 'Username' %}</label>
+    <input type="text" name="username" placeholder="{% trans 'Username' %}" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" class="form-control" title="" required="" id="id_username">
+  </div>
+  <div class="form-group">
+    <label for="id_password">{% trans 'Password' %}</label>
+    <input type="password" name="password"  placeholder="{% trans 'Password' %}" autocomplete="current-password" class="form-control" title="" required="" id="id_password">
+  </div>
+  <div class="form-group">
+    <input class="btn btn-primary" type="submit" value="{% trans 'Log in' %}">
+  </div>
+</form>
+{% endblock %}
