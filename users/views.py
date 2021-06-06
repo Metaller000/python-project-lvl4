@@ -1,3 +1,4 @@
+from users.models import Statuses
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.signals import user_logged_in, user_logged_out, user_login_failed
@@ -13,6 +14,10 @@ LOGOUT = '/logout/'
 USERS = 'users/users.html'
 CREATE = 'registration/create.html'
 DELETE = 'users/delete.html'
+STATUS_READ = 'statuses/status_read.html'
+STATUS_CREATE = 'statuses/status_create.html'
+STATUS_UPDATE = 'statuses/status_update.html'
+STATUS_DELETE = 'statuses/status_delete.html'
 
 
 def base(request):
@@ -87,7 +92,7 @@ def delete(request, pk=0, msg=True):
 
 def update(request, pk=0):
     if request.user.is_authenticated and pk == request.user.id:
-        form = UserForm(request.POST)        
+        form = UserForm(request.POST)
         if request.method == 'POST' and (form.is_valid() or request.POST['username'] == request.user.username):
             delete(request, pk, msg=False)
             create(request, msg=False)
@@ -97,3 +102,58 @@ def update(request, pk=0):
         return create(request)
     else:
         return delete(request, pk)
+
+
+def check_logged_status(fun):
+    def wrapper(request, pk=0):        
+        if request.user.id is None:
+            return base(request)
+        else:
+            if fun.__code__.co_argcount == 2:
+                return fun(request, pk)
+            return fun(request)
+    return wrapper
+
+
+@check_logged_status
+def statuses_read(request):    
+    return render(request, STATUS_READ, {'statuses': Statuses.objects.all()})
+
+
+@check_logged_status
+def statuses_create(request):
+    if request.method == 'POST':
+        Statuses(name=request.POST.get('name')).save()
+        messages.success(request, _('Status created successfully'))
+        return statuses_read(request)
+
+    return render(request, STATUS_CREATE, {})
+
+
+@check_logged_status
+def statuses_delete(request, pk=0):
+    if request.method == 'POST':
+        Statuses.objects.filter(id=pk).delete()
+        messages.success(request, _('Status delete successfully'))
+        return statuses_read(request)
+
+    name = Statuses.objects.filter(id=pk).all()[0]
+    return render(request, STATUS_DELETE, {'name': name})
+
+
+@check_logged_status
+def statuses_update(request, pk=0):
+    statuses = Statuses.objects.filter(id=pk)
+    
+    if request.method == 'POST':
+        try:
+            statuses.update(name=request.POST.get('name'))
+        except Exception as e:            
+            fields = {'name': request.POST.get('name'), 'error' : _('Name already exist')}
+            return render(request, STATUS_UPDATE, fields)
+
+        messages.success(request, _('Status updated successfully'))
+        return statuses_read(request)
+
+    
+    return render(request, STATUS_UPDATE, {'name': statuses.all()[0]})

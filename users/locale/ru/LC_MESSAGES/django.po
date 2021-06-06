@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-26 20:26+0300\n"
+"POT-Creation-Date: 2021-06-07 01:11+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,15 +36,19 @@ msgstr "Менеджер задач"
 msgid "Users"
 msgstr "Пользователи"
 
-#: users/templates/base.html:29
+#: users/templates/base.html:26 users/templates/statuses/status_read.html:7
+msgid "Statuses"
+msgstr "Статусы"
+
+#: users/templates/base.html:34
 msgid "Exit"
 msgstr "Выход"
 
-#: users/templates/base.html:33 users/templates/registration/login.html:9
+#: users/templates/base.html:38 users/templates/registration/login.html:9
 msgid "Enter"
 msgstr "Вход"
 
-#: users/templates/base.html:36 users/templates/registration/create.html:7
+#: users/templates/base.html:41 users/templates/registration/create.html:7
 msgid "Registration"
 msgstr "Регистрация"
 
@@ -134,6 +138,8 @@ msgid "To confirm, please enter the password again."
 msgstr "Для подтверждения введите, пожалуйста, пароль ещё раз."
 
 #: users/templates/registration/create.html:145
+#: users/templates/statuses/status_read.html:25
+#: users/templates/statuses/status_update.html:23
 #: users/templates/users/users.html:26
 msgid "Edit"
 msgstr "Изменить"
@@ -146,21 +152,60 @@ msgstr "Зарегестрировать"
 msgid "Log in"
 msgstr "Войти"
 
-#: users/templates/users/delete.html:7
-msgid "Deleting a user"
-msgstr "Удаление пользователя"
+#: users/templates/statuses/status_create.html:7
+#: users/templates/statuses/status_read.html:8
+msgid "Create status"
+msgstr "Созать статус"
 
+#: users/templates/statuses/status_create.html:10
+#: users/templates/statuses/status_create.html:11
+#: users/templates/statuses/status_read.html:13
+#: users/templates/statuses/status_update.html:12
+#: users/templates/statuses/status_update.html:13
+#: users/templates/statuses/status_update.html:18
+#: users/templates/statuses/status_update.html:19
+msgid "Name"
+msgstr "Имя"
+
+#: users/templates/statuses/status_create.html:14
+msgid "Create"
+msgstr "Создаь"
+
+#: users/templates/statuses/status_delete.html:7
+msgid "Delete status"
+msgstr "Удалить статус"
+
+#: users/templates/statuses/status_delete.html:9
 #: users/templates/users/delete.html:8
 msgid "Are you sure, you want to delete"
 msgstr "Вы уверены, что хотите удалить "
 
+#: users/templates/statuses/status_delete.html:12
 #: users/templates/users/delete.html:11
 msgid "Yes, delete"
 msgstr "Да, удалить"
 
+#: users/templates/statuses/status_read.html:12
 #: users/templates/users/users.html:11
 msgid "ID"
 msgstr "ID"
+
+#: users/templates/statuses/status_read.html:14
+msgid "Add date"
+msgstr "Дата создания"
+
+#: users/templates/statuses/status_read.html:27
+#: users/templates/users/users.html:28
+msgid "Delete"
+msgstr "Удалить"
+
+#: users/templates/statuses/status_update.html:7
+msgid "Edit status"
+msgstr "Изменить статус"
+
+#: users/templates/users/delete.html:7
+msgid "Deleting a user"
+msgstr "Удаление пользователя"
 
 #: users/templates/users/users.html:13
 msgid "Full name"
@@ -170,19 +215,15 @@ msgstr "Полное имя"
 msgid "Joined date"
 msgstr "Дата создания"
 
-#: users/templates/users/users.html:28
-msgid "Delete"
-msgstr "Удалить"
-
-#: users/views.py:23
+#: users/views.py:28
 msgid "You are logged in"
 msgstr "Вы залогиненны"
 
-#: users/views.py:27
+#: users/views.py:32
 msgid "You are logged out"
 msgstr "Вы разлогиненны"
 
-#: users/views.py:31
+#: users/views.py:36
 msgid ""
 "Please enter the correct username and password. Both fields can be case "
 "sensitive."
@@ -190,22 +231,38 @@ msgstr ""
 "Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут "
 "быть чувствительны к регистру."
 
-#: users/views.py:60
+#: users/views.py:65
 msgid "User registered successfully"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: users/views.py:74
+#: users/views.py:79
 msgid "User deleted successfully"
 msgstr "Пользователь успешно удалён"
 
-#: users/views.py:80
+#: users/views.py:85
 msgid "You are not login! Please, login"
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход"
 
-#: users/views.py:82
+#: users/views.py:87
 msgid "You do not have permission for another user change"
 msgstr "У вас нет прав для изменения другого пользователя"
 
-#: users/views.py:94
+#: users/views.py:99
 msgid "User updated successfully"
 msgstr "Пользователь успешно изменён "
+
+#: users/views.py:127
+msgid "Status created successfully"
+msgstr "Статус успешно создан "
+
+#: users/views.py:137
+msgid "Status delete successfully"
+msgstr "Статус успешно удалён"
+
+#: users/views.py:152
+msgid "Name already exist"
+msgstr "Имя уже существует"
+
+#: users/views.py:155
+msgid "Status updated successfully"
+msgstr "Статус успешно изменён "

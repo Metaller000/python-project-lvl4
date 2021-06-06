@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block content %}
+    <h1 class="my-4">{% trans 'Edit status' %}</h1>      
+    <form method="post">
+        {% csrf_token %}  
+        {% if error %} 
+        <div class="form-group is-invalid">
+            <label for="id_name">{% trans 'Name' %}</label>            
+            <input type="text" name="name" value="{{name}}" maxlength="100" class="form-control is-invalid" placeholder="{% trans 'Name' %}" title="" required="" id="id_name">            
+            <div class="invalid-feedback">{{ error }}</div>
+        </div>
+        {% else %}
+        <div class="form-group">
+            <label for="id_name">{% trans 'Name' %}</label>
+            <input type="text" name="name" value="{{name}}" maxlength="100" class="form-control" placeholder="{% trans 'Name' %}" title="" required="" id="id_name">            
+        </div>
+        {% endif%}
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="{%trans 'Edit'%}">
+        </div>
+    </form>
+{% endblock %}
