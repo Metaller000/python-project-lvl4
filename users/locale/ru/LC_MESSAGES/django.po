@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-14 20:59+0300\n"
+"POT-Creation-Date: 2021-06-14 23:30+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -207,6 +207,7 @@ msgstr "ID"
 
 #: users/templates/statuses/status_read.html:14
 #: users/templates/tasks/task_read.html:17
+#: users/templates/tasks/task_viev.html:30
 msgid "Add date"
 msgstr "Дата создания"
 
@@ -230,16 +231,25 @@ msgid "Delete task"
 msgstr "Удалить задачу"
 
 #: users/templates/tasks/task_read.html:14
+#: users/templates/tasks/task_viev.html:26
 msgid "Status"
 msgstr "Статус"
 
 #: users/templates/tasks/task_read.html:15
+#: users/templates/tasks/task_viev.html:18
 msgid "Autor"
 msgstr "Автор"
 
 #: users/templates/tasks/task_read.html:16
+#: users/templates/tasks/task_viev.html:22
 msgid "Executor"
 msgstr "Исполнитель"
+
+#: users/templates/tasks/task_viev.html:8
+#, fuzzy
+#| msgid "Create task"
+msgid "view task"
+msgstr "Созать Задачу"
 
 #: users/templates/users/delete.html:7
 msgid "Deleting a user"

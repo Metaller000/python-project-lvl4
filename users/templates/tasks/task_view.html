@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block content %}      
+    <div class="container wrapper flex-grow-1">
+      <h1 class="my-4">{%trans 'view task'%}</h1>
+        <div class="card">
+        <div class="card-header bg-secondary text-white">
+            <h2>{{tasks.first.name}}</h2>
+        </div>
+        <div class="card-body bg-light">
+            <p>{{tasks.first.description}}</p>
+            <hr>
+            <div class="container">
+            <div class="row p-1">
+                <div class="col">{% trans 'Autor' %}</div>
+                <div class="col">{{tasks.first.autor}}</div>
+            </div>
+            <div class="row p-1">
+                <div class="col">{% trans 'Executor' %}</div>
+                <div class="col">{{tasks.first.user.first_name }} {{tasks.first.user.last_name}}</div>
+            </div>
+            <div class="row p-1">
+                <div class="col">{% trans 'Status' %}</div>
+                <div class="col">{{tasks.first.status}}</div>
+            </div>
+            <div class="row p-1">
+                <div class="col">{% trans 'Add date' %}</div>
+                <div class="col">{{tasks.first.add_date}}</div>
+            </div>            
+            <div class="row p-1">
+                <div class="col">
+                <a href="/tasks/{{tasks.first.id}}/update/">Изменить</a>
+                <br>
+                <a href="/tasks/{{tasks.first.id}}/delete/">Удалить</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

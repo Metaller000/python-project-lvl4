@@ -22,6 +22,7 @@ TASK_READ = 'tasks/task_read.html'
 TASK_CREATE = 'tasks/task_create.html'
 TASK_UPDATE = 'tasks/task_update.html'
 TASK_DELETE = 'tasks/task_delete.html'
+TASK_VIEW = 'tasks/task_view.html'
 
 # users
 
@@ -84,7 +85,7 @@ def delete(request, pk=0, msg=True):
                 User.objects.filter(id=pk).delete()
             except Exception as e:
                 messages.error(request, _('There is a task on user'))
-                msg = False  
+                msg = False
             if msg:
                 messages.success(request, _('User deleted successfully'))
             return redirect('/users/')
@@ -199,14 +200,14 @@ def tasks_delete(request, pk=0):
     if request.method == 'POST':
         Tasks.objects.filter(id=pk).delete()
         messages.success(request, _('Tasks delete successfully'))
-        return tasks_read(request)
+        return redirect('/tasks/')
 
     user = str(User.objects.get(id=request.user.id))
     autor = str(Tasks.objects.get(id=pk).autor)
-    
+
     if autor != user:
         messages.error(request, _('A task can only be deleted by its author'))
-        return tasks_read(request)
+        return redirect('/tasks/')
 
     name = Tasks.objects.filter(id=pk).all()[0]
     return render(request, TASK_DELETE, {'name': name})
@@ -235,13 +236,19 @@ def tasks_update(request, pk=0):
             }
             return render(request, TASK_UPDATE, fields)
 
-        messages.success(request, _('Task updated successfully'))
-        return tasks_read(request)
+        messages.success(request, _('Task updated successfully'))        
+        return redirect('/tasks/')
 
     tables = {
         'tasks': tasks,
         'statuses': Statuses.objects.all(),
         'users': User.objects.all(),
     }
-    print(tasks)
+    
     return render(request, TASK_UPDATE, tables)
+
+
+@check_logged_user
+def tasks_view(request, pk=0):
+    tasks = Tasks.objects.filter(id=pk)
+    return render(request, TASK_VIEW, {'tasks': tasks})
