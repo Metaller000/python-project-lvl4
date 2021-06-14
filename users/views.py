@@ -1,4 +1,4 @@
-from users.models import Statuses
+from users.models import Statuses, Tasks
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.signals import user_logged_in, user_logged_out, user_login_failed
@@ -18,6 +18,12 @@ STATUS_READ = 'statuses/status_read.html'
 STATUS_CREATE = 'statuses/status_create.html'
 STATUS_UPDATE = 'statuses/status_update.html'
 STATUS_DELETE = 'statuses/status_delete.html'
+TASK_READ = 'tasks/task_read.html'
+TASK_CREATE = 'tasks/task_create.html'
+TASK_UPDATE = 'tasks/task_update.html'
+TASK_DELETE = 'tasks/task_delete.html'
+
+# users
 
 
 def base(request):
@@ -74,7 +80,11 @@ def create(request, msg=True):
 def delete(request, pk=0, msg=True):
     if request.user.is_authenticated and pk == request.user.id:
         if request.method == 'POST':
-            User.objects.filter(id=pk).delete()
+            try:
+                User.objects.filter(id=pk).delete()
+            except Exception as e:
+                messages.error(request, _('There is a task on user'))
+                msg = False  
             if msg:
                 messages.success(request, _('User deleted successfully'))
             return redirect('/users/')
@@ -104,9 +114,9 @@ def update(request, pk=0):
         return delete(request, pk)
 
 
-def check_logged_status(fun):
-    def wrapper(request, pk=0):        
-        if request.user.id is None:
+def check_logged_user(fun):
+    def wrapper(request, pk=0):
+        if not request.user.is_authenticated:
             return base(request)
         else:
             if fun.__code__.co_argcount == 2:
@@ -114,13 +124,15 @@ def check_logged_status(fun):
             return fun(request)
     return wrapper
 
+# statuses
 
-@check_logged_status
-def statuses_read(request):    
+
+@check_logged_user
+def statuses_read(request):
     return render(request, STATUS_READ, {'statuses': Statuses.objects.all()})
 
 
-@check_logged_status
+@check_logged_user
 def statuses_create(request):
     if request.method == 'POST':
         Statuses(name=request.POST.get('name')).save()
@@ -130,7 +142,7 @@ def statuses_create(request):
     return render(request, STATUS_CREATE, {})
 
 
-@check_logged_status
+@check_logged_user
 def statuses_delete(request, pk=0):
     if request.method == 'POST':
         Statuses.objects.filter(id=pk).delete()
@@ -141,19 +153,95 @@ def statuses_delete(request, pk=0):
     return render(request, STATUS_DELETE, {'name': name})
 
 
-@check_logged_status
+@check_logged_user
 def statuses_update(request, pk=0):
     statuses = Statuses.objects.filter(id=pk)
-    
+
     if request.method == 'POST':
         try:
             statuses.update(name=request.POST.get('name'))
-        except Exception as e:            
-            fields = {'name': request.POST.get('name'), 'error' : _('Name already exist')}
+        except Exception as e:
+            fields = {'name': request.POST.get('name'), 'error': _('Name already exist')}
             return render(request, STATUS_UPDATE, fields)
 
         messages.success(request, _('Status updated successfully'))
         return statuses_read(request)
 
-    
     return render(request, STATUS_UPDATE, {'name': statuses.all()[0]})
+
+# tasks
+
+
+@check_logged_user
+def tasks_read(request):
+    return render(request, TASK_READ, {'tasks': Tasks.objects.all()})
+
+
+@check_logged_user
+def tasks_create(request):
+    if request.method == 'POST':
+        task = Tasks(
+            name=request.POST.get('name'),
+            autor=User.objects.get(id=request.user.id),
+            description=request.POST.get('description'),
+            status=Statuses.objects.get(id=request.POST.get('status')),
+            user=User.objects.get(id=request.POST.get('executor')),
+        )
+        task.save()
+        messages.success(request, _('Task created successfully'))
+        return tasks_read(request)
+
+    return render(request, TASK_CREATE, {'statuses': Statuses.objects.all(), 'users': User.objects.all()})
+
+
+@check_logged_user
+def tasks_delete(request, pk=0):
+    if request.method == 'POST':
+        Tasks.objects.filter(id=pk).delete()
+        messages.success(request, _('Tasks delete successfully'))
+        return tasks_read(request)
+
+    user = str(User.objects.get(id=request.user.id))
+    autor = str(Tasks.objects.get(id=pk).autor)
+    
+    if autor != user:
+        messages.error(request, _('A task can only be deleted by its author'))
+        return tasks_read(request)
+
+    name = Tasks.objects.filter(id=pk).all()[0]
+    return render(request, TASK_DELETE, {'name': name})
+
+
+@check_logged_user
+def tasks_update(request, pk=0):
+    tasks = Tasks.objects.filter(id=pk)
+
+    if request.method == 'POST':
+        try:
+            tasks.update(
+                name=request.POST.get('name'),
+                autor=str(User.objects.get(id=request.user.id)),
+                description=request.POST.get('description'),
+                status=Statuses.objects.get(id=request.POST.get('status')),
+                user=User.objects.get(id=request.POST.get('executor')),
+            )
+        except Exception as e:
+            print(e)
+            fields = {
+                'tasks': tasks,
+                'statuses': Statuses.objects.all(),
+                'users': User.objects.all(),
+                'error': _('Name already exist'),
+            }
+            return render(request, TASK_UPDATE, fields)
+
+        messages.success(request, _('Task updated successfully'))
+        return tasks_read(request)
+
+    tables = {
+        'tasks': tasks,
+        'statuses': Statuses.objects.all(),
+        'users': User.objects.all(),
+    }
+    print(tasks)
+    return render(request, TASK_UPDATE, tables)

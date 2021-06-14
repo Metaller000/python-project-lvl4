@@ -15,4 +15,8 @@ urlpatterns = [
     path('statuses/create/', views.statuses_create),
     path('statuses/<int:pk>/update/', views.statuses_update),
     path('statuses/<int:pk>/delete/', views.statuses_delete),
+    path('tasks/', views.tasks_read),
+    path('tasks/create/', views.tasks_create),
+    path('tasks/<int:pk>/update/', views.tasks_update),
+    path('tasks/<int:pk>/delete/', views.tasks_delete),    
 ]

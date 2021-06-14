@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block content %}  
+    <h1 class="my-4">{% trans 'Create task' %}</h1>      
+    <form method="post">
+        {% csrf_token %}  
+        <div class="form-group"><label for="id_name">{% trans 'Name' %}</label>
+            <input type="text" name="name" maxlength="100" class="form-control" placeholder="{% trans 'Name' %}" title="" required="" id="id_name">
+        </div>
+        <div class="form-group">
+            <label for="id_description">Описание</label>
+            <textarea name="description" cols="40" rows="10" class="form-control" placeholder="Описание" title="" id="id_description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="id_status">Статус</label>
+            <select name="status" class="form-control" title="" required="" id="id_status">
+            <option value="" selected="">---------</option>            
+            {% for status in statuses %}            
+                <option value="{{status.id}}">{{status.name}}</option>    
+            {% endfor %}            
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="id_executor">Исполнитель</label>
+            <select name="executor" class="form-control" title="" id="id_executor">
+            <option value="" selected="">---------</option>
+            {% for user in users %}            
+                <option value="{{user.id}}">{{ user.first_name }} {{ user.last_name }}</option>    
+            {% endfor %}    
+            </select>
+        </div>
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="{%trans 'Create'%}">
+        </div>
+    </form>
+{% endblock %}
