@@ -11,11 +11,11 @@
             <input type="text" name="name" maxlength="100" class="form-control" placeholder="{% trans 'Name' %}" title="" required="" id="id_name">
         </div>
         <div class="form-group">
-            <label for="id_description">Описание</label>
+            <label for="id_description">{%trans 'Description'%}</label>
             <textarea name="description" cols="40" rows="10" class="form-control" placeholder="Описание" title="" id="id_description"></textarea>
         </div>
         <div class="form-group">
-            <label for="id_status">Статус</label>
+            <label for="id_status">{%trans 'Status'%}</label>
             <select name="status" class="form-control" title="" required="" id="id_status">
             <option value="" selected="">---------</option>            
             {% for status in statuses %}            
@@ -24,12 +24,20 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="id_executor">Исполнитель</label>
+            <label for="id_executor">{%trans 'Executor'%}</label>
             <select name="executor" class="form-control" title="" id="id_executor">
             <option value="" selected="">---------</option>
             {% for user in users %}            
                 <option value="{{user.id}}">{{ user.first_name }} {{ user.last_name }}</option>    
             {% endfor %}    
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="id_labels">{%trans 'Labels'%}</label>
+            <select name="labels" class="form-control" title="" id="id_labels" multiple="">
+                {% for label in labels %}            
+                    <option value="{{label.id}}">{{ label.name }}</option>    
+                {% endfor %}
             </select>
         </div>
         <div class="form-group">

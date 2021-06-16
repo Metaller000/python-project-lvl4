@@ -4,7 +4,7 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 {% block content %}  
-    <h1 class="my-4">{% trans 'Create status' %}</h1>      
+    <h1 class="my-4">{% trans 'Create label' %}</h1>      
     <form method="post">
         {% csrf_token %}  
         <div class="form-group"><label for="id_name">{% trans 'Name' %}</label>

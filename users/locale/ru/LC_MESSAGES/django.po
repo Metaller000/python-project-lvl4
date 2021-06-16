@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-14 23:30+0300\n"
+"POT-Creation-Date: 2021-06-17 01:51+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,21 +40,114 @@ msgstr "Пользователи"
 msgid "Statuses"
 msgstr "Статусы"
 
-#: users/templates/base.html:29 users/templates/tasks/task_read.html:7
+#: users/templates/base.html:29 users/templates/labels/label_read.html:7
+#: users/templates/tasks/task_create.html:36
+#: users/templates/tasks/task_update.html:53
+msgid "Labels"
+msgstr "Метки"
+
+#: users/templates/base.html:32 users/templates/tasks/task_read.html:7
 msgid "Tasks"
 msgstr "Задачи"
 
-#: users/templates/base.html:37
+#: users/templates/base.html:40
 msgid "Exit"
 msgstr "Выход"
 
-#: users/templates/base.html:41 users/templates/registration/login.html:9
+#: users/templates/base.html:44 users/templates/registration/login.html:9
 msgid "Enter"
 msgstr "Вход"
 
-#: users/templates/base.html:44 users/templates/registration/create.html:7
+#: users/templates/base.html:47 users/templates/registration/create.html:7
 msgid "Registration"
 msgstr "Регистрация"
+
+#: users/templates/labels/label_create.html:7
+#: users/templates/labels/label_read.html:8
+msgid "Create label"
+msgstr "Создать метку"
+
+#: users/templates/labels/label_create.html:10
+#: users/templates/labels/label_create.html:11
+#: users/templates/labels/label_read.html:13
+#: users/templates/labels/label_update.html:12
+#: users/templates/labels/label_update.html:13
+#: users/templates/labels/label_update.html:18
+#: users/templates/labels/label_update.html:19
+#: users/templates/statuses/status_create.html:10
+#: users/templates/statuses/status_create.html:11
+#: users/templates/statuses/status_read.html:13
+#: users/templates/statuses/status_update.html:12
+#: users/templates/statuses/status_update.html:13
+#: users/templates/statuses/status_update.html:18
+#: users/templates/statuses/status_update.html:19
+#: users/templates/tasks/task_create.html:10
+#: users/templates/tasks/task_create.html:11
+#: users/templates/tasks/task_read.html:13
+#: users/templates/tasks/task_update.html:12
+#: users/templates/tasks/task_update.html:13
+#: users/templates/tasks/task_update.html:18
+#: users/templates/tasks/task_update.html:19
+msgid "Name"
+msgstr "Имя"
+
+#: users/templates/labels/label_create.html:14
+#: users/templates/statuses/status_create.html:14
+#: users/templates/tasks/task_create.html:44
+msgid "Create"
+msgstr "Создать"
+
+#: users/templates/labels/label_delete.html:7
+msgid "Delete label"
+msgstr "Удалить метку"
+
+#: users/templates/labels/label_delete.html:9
+#: users/templates/statuses/status_delete.html:9
+#: users/templates/tasks/task_delete.html:9 users/templates/users/delete.html:8
+msgid "Are you sure, you want to delete"
+msgstr "Вы уверены, что хотите удалить "
+
+#: users/templates/labels/label_delete.html:12
+#: users/templates/statuses/status_delete.html:12
+#: users/templates/tasks/task_delete.html:12
+#: users/templates/users/delete.html:11
+msgid "Yes, delete"
+msgstr "Да, удалить"
+
+#: users/templates/labels/label_read.html:12
+#: users/templates/statuses/status_read.html:12
+#: users/templates/tasks/task_read.html:12 users/templates/users/users.html:11
+msgid "ID"
+msgstr "ID"
+
+#: users/templates/labels/label_read.html:14
+#: users/templates/statuses/status_read.html:14
+#: users/templates/tasks/task_read.html:17
+#: users/templates/tasks/task_view.html:30
+msgid "Add date"
+msgstr "Дата создания"
+
+#: users/templates/labels/label_read.html:25
+#: users/templates/labels/label_update.html:23
+#: users/templates/registration/create.html:145
+#: users/templates/statuses/status_read.html:25
+#: users/templates/statuses/status_update.html:23
+#: users/templates/tasks/task_read.html:31
+#: users/templates/tasks/task_update.html:61
+#: users/templates/tasks/task_view.html:35 users/templates/users/users.html:26
+msgid "Edit"
+msgstr "Изменить"
+
+#: users/templates/labels/label_read.html:27
+#: users/templates/statuses/status_read.html:27
+#: users/templates/tasks/task_read.html:33
+#: users/templates/tasks/task_view.html:37 users/templates/users/users.html:28
+msgid "Delete"
+msgstr "Удалить"
+
+#: users/templates/labels/label_update.html:7
+msgid "Edit label"
+msgstr "Изменить метку"
 
 #: users/templates/registration/create.html:7
 msgid "User change"
@@ -142,15 +235,6 @@ msgid "To confirm, please enter the password again."
 msgstr "Для подтверждения введите, пожалуйста, пароль ещё раз."
 
 #: users/templates/registration/create.html:145
-#: users/templates/statuses/status_read.html:25
-#: users/templates/statuses/status_update.html:23
-#: users/templates/tasks/task_read.html:31
-#: users/templates/tasks/task_update.html:53
-#: users/templates/users/users.html:26
-msgid "Edit"
-msgstr "Изменить"
-
-#: users/templates/registration/create.html:145
 msgid "Submit"
 msgstr "Зарегестрировать"
 
@@ -161,95 +245,57 @@ msgstr "Войти"
 #: users/templates/statuses/status_create.html:7
 #: users/templates/statuses/status_read.html:8
 msgid "Create status"
-msgstr "Созать статус"
-
-#: users/templates/statuses/status_create.html:10
-#: users/templates/statuses/status_create.html:11
-#: users/templates/statuses/status_read.html:13
-#: users/templates/statuses/status_update.html:12
-#: users/templates/statuses/status_update.html:13
-#: users/templates/statuses/status_update.html:18
-#: users/templates/statuses/status_update.html:19
-#: users/templates/tasks/task_create.html:10
-#: users/templates/tasks/task_create.html:11
-#: users/templates/tasks/task_read.html:13
-#: users/templates/tasks/task_update.html:12
-#: users/templates/tasks/task_update.html:13
-#: users/templates/tasks/task_update.html:18
-#: users/templates/tasks/task_update.html:19
-msgid "Name"
-msgstr "Имя"
-
-#: users/templates/statuses/status_create.html:14
-#: users/templates/tasks/task_create.html:36
-msgid "Create"
-msgstr "Создаь"
+msgstr "Создать статус"
 
 #: users/templates/statuses/status_delete.html:7
 msgid "Delete status"
 msgstr "Удалить статус"
 
-#: users/templates/statuses/status_delete.html:9
-#: users/templates/tasks/task_delete.html:9 users/templates/users/delete.html:8
-msgid "Are you sure, you want to delete"
-msgstr "Вы уверены, что хотите удалить "
-
-#: users/templates/statuses/status_delete.html:12
-#: users/templates/tasks/task_delete.html:12
-#: users/templates/users/delete.html:11
-msgid "Yes, delete"
-msgstr "Да, удалить"
-
-#: users/templates/statuses/status_read.html:12
-#: users/templates/tasks/task_read.html:12 users/templates/users/users.html:11
-msgid "ID"
-msgstr "ID"
-
-#: users/templates/statuses/status_read.html:14
-#: users/templates/tasks/task_read.html:17
-#: users/templates/tasks/task_viev.html:30
-msgid "Add date"
-msgstr "Дата создания"
-
-#: users/templates/statuses/status_read.html:27
-#: users/templates/tasks/task_read.html:33 users/templates/users/users.html:28
-msgid "Delete"
-msgstr "Удалить"
-
 #: users/templates/statuses/status_update.html:7
-#: users/templates/tasks/task_update.html:7
 msgid "Edit status"
 msgstr "Изменить статус"
 
 #: users/templates/tasks/task_create.html:7
 #: users/templates/tasks/task_read.html:8
 msgid "Create task"
-msgstr "Созать Задачу"
+msgstr "Создать Задачу"
+
+#: users/templates/tasks/task_create.html:14
+#: users/templates/tasks/task_update.html:23
+#: users/templates/tasks/task_update.html:24
+msgid "Description"
+msgstr "Описание"
+
+#: users/templates/tasks/task_create.html:18
+#: users/templates/tasks/task_read.html:14
+#: users/templates/tasks/task_update.html:27
+#: users/templates/tasks/task_view.html:26
+msgid "Status"
+msgstr "Статус"
+
+#: users/templates/tasks/task_create.html:27
+#: users/templates/tasks/task_read.html:16
+#: users/templates/tasks/task_update.html:40
+#: users/templates/tasks/task_view.html:22
+msgid "Executor"
+msgstr "Исполнитель"
 
 #: users/templates/tasks/task_delete.html:7
 msgid "Delete task"
 msgstr "Удалить задачу"
 
-#: users/templates/tasks/task_read.html:14
-#: users/templates/tasks/task_viev.html:26
-msgid "Status"
-msgstr "Статус"
-
 #: users/templates/tasks/task_read.html:15
-#: users/templates/tasks/task_viev.html:18
+#: users/templates/tasks/task_view.html:18
 msgid "Autor"
 msgstr "Автор"
 
-#: users/templates/tasks/task_read.html:16
-#: users/templates/tasks/task_viev.html:22
-msgid "Executor"
-msgstr "Исполнитель"
+#: users/templates/tasks/task_update.html:7
+msgid "Edit task"
+msgstr "Изменить задачу"
 
-#: users/templates/tasks/task_viev.html:8
-#, fuzzy
-#| msgid "Create task"
+#: users/templates/tasks/task_view.html:8
 msgid "view task"
-msgstr "Созать Задачу"
+msgstr "показать задачу"
 
 #: users/templates/users/delete.html:7
 msgid "Deleting a user"
@@ -263,15 +309,15 @@ msgstr "Полное имя"
 msgid "Joined date"
 msgstr "Дата создания"
 
-#: users/views.py:34
+#: users/views.py:39
 msgid "You are logged in"
 msgstr "Вы залогиненны"
 
-#: users/views.py:38
+#: users/views.py:43
 msgid "You are logged out"
 msgstr "Вы разлогиненны"
 
-#: users/views.py:42
+#: users/views.py:47
 msgid ""
 "Please enter the correct username and password. Both fields can be case "
 "sensitive."
@@ -279,58 +325,74 @@ msgstr ""
 "Пожалуйста, введите правильные имя пользователя и пароль. Оба поля могут "
 "быть чувствительны к регистру."
 
-#: users/views.py:71
+#: users/views.py:76
 msgid "User registered successfully"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: users/views.py:86
+#: users/views.py:91
 msgid "There is a task on user"
-msgstr ""
+msgstr "Есть задача на пользователе"
 
-#: users/views.py:89
+#: users/views.py:94
 msgid "User deleted successfully"
 msgstr "Пользователь успешно удалён"
 
-#: users/views.py:95
+#: users/views.py:100
 msgid "You are not login! Please, login"
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход"
 
-#: users/views.py:97
+#: users/views.py:102
 msgid "You do not have permission for another user change"
 msgstr "У вас нет прав для изменения другого пользователя"
 
-#: users/views.py:109
+#: users/views.py:114
 msgid "User updated successfully"
 msgstr "Пользователь успешно изменён "
 
-#: users/views.py:139
+#: users/views.py:144
 msgid "Status created successfully"
 msgstr "Статус успешно создан "
 
-#: users/views.py:149
+#: users/views.py:154
 msgid "Status delete successfully"
 msgstr "Статус успешно удалён"
 
-#: users/views.py:164 users/views.py:234
+#: users/views.py:169 users/views.py:248 users/views.py:311
 msgid "Name already exist"
 msgstr "Имя уже существует"
 
-#: users/views.py:167
+#: users/views.py:172
 msgid "Status updated successfully"
 msgstr "Статус успешно изменён "
 
-#: users/views.py:191
+#: users/views.py:199
 msgid "Task created successfully"
-msgstr "Задача успешно создан "
+msgstr "Задача успешно создана"
 
-#: users/views.py:201
+#: users/views.py:209
 msgid "Tasks delete successfully"
-msgstr "Задача успешно удалён"
+msgstr "Задача успешно удалёна"
 
-#: users/views.py:208
+#: users/views.py:216
 msgid "A task can only be deleted by its author"
 msgstr "Здача может быть удалена только ее автором"
 
-#: users/views.py:238
+#: users/views.py:252
 msgid "Task updated successfully"
-msgstr "Задача успешно изменён "
+msgstr "Задача успешно изменёна"
+
+#: users/views.py:282
+msgid "Label created successfully"
+msgstr "Метка успешно создана"
+
+#: users/views.py:292
+msgid "Label delete successfully"
+msgstr "Метка успешно удалёна"
+
+#: users/views.py:296
+msgid "Label have task(s)"
+msgstr "У метки есть задача(и)"
+
+#: users/views.py:314
+msgid "Label updated successfully"
+msgstr "Метка успешно изменёна"

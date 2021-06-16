@@ -1,4 +1,4 @@
-from users.models import Statuses, Tasks
+from users.models import Statuses, Tasks, Labels
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.signals import user_logged_in, user_logged_out, user_login_failed
@@ -23,6 +23,10 @@ TASK_CREATE = 'tasks/task_create.html'
 TASK_UPDATE = 'tasks/task_update.html'
 TASK_DELETE = 'tasks/task_delete.html'
 TASK_VIEW = 'tasks/task_view.html'
+LABEL_READ = 'labels/label_read.html'
+LABEL_CREATE = 'labels/label_create.html'
+LABEL_UPDATE = 'labels/label_update.html'
+LABEL_DELETE = 'labels/label_delete.html'
 
 # users
 
@@ -138,7 +142,7 @@ def statuses_create(request):
     if request.method == 'POST':
         Statuses(name=request.POST.get('name')).save()
         messages.success(request, _('Status created successfully'))
-        return statuses_read(request)
+        return redirect('/statuses/')
 
     return render(request, STATUS_CREATE, {})
 
@@ -148,7 +152,7 @@ def statuses_delete(request, pk=0):
     if request.method == 'POST':
         Statuses.objects.filter(id=pk).delete()
         messages.success(request, _('Status delete successfully'))
-        return statuses_read(request)
+        return redirect('/statuses/')
 
     name = Statuses.objects.filter(id=pk).all()[0]
     return render(request, STATUS_DELETE, {'name': name})
@@ -166,7 +170,7 @@ def statuses_update(request, pk=0):
             return render(request, STATUS_UPDATE, fields)
 
         messages.success(request, _('Status updated successfully'))
-        return statuses_read(request)
+        return redirect('/statuses/')
 
     return render(request, STATUS_UPDATE, {'name': statuses.all()[0]})
 
@@ -189,10 +193,13 @@ def tasks_create(request):
             user=User.objects.get(id=request.POST.get('executor')),
         )
         task.save()
-        messages.success(request, _('Task created successfully'))
-        return tasks_read(request)
+        for label in request.POST.getlist('labels'):
+            task.label.add(Labels.objects.get(id=label))
 
-    return render(request, TASK_CREATE, {'statuses': Statuses.objects.all(), 'users': User.objects.all()})
+        messages.success(request, _('Task created successfully'))
+        return redirect('/tasks/')
+
+    return render(request, TASK_CREATE, {'labels': Labels.objects.all(), 'statuses': Statuses.objects.all(), 'users': User.objects.all()})
 
 
 @check_logged_user
@@ -219,36 +226,92 @@ def tasks_update(request, pk=0):
 
     if request.method == 'POST':
         try:
-            tasks.update(
+            tasks.delete()
+            task = Tasks(
                 name=request.POST.get('name'),
-                autor=str(User.objects.get(id=request.user.id)),
+                autor=User.objects.get(id=request.user.id),
                 description=request.POST.get('description'),
                 status=Statuses.objects.get(id=request.POST.get('status')),
                 user=User.objects.get(id=request.POST.get('executor')),
             )
+            task.save()
+            for label in request.POST.getlist('labels'):
+                task.label.add(Labels.objects.get(id=label))
+          
         except Exception as e:
             print(e)
             fields = {
                 'tasks': tasks,
                 'statuses': Statuses.objects.all(),
                 'users': User.objects.all(),
+                'labels': Labels.objects.all(),
                 'error': _('Name already exist'),
             }
             return render(request, TASK_UPDATE, fields)
 
-        messages.success(request, _('Task updated successfully'))        
+        messages.success(request, _('Task updated successfully'))
         return redirect('/tasks/')
 
     tables = {
         'tasks': tasks,
         'statuses': Statuses.objects.all(),
         'users': User.objects.all(),
+        'labels': Labels.objects.all(),
     }
-    
+
     return render(request, TASK_UPDATE, tables)
 
 
 @check_logged_user
 def tasks_view(request, pk=0):
-    tasks = Tasks.objects.filter(id=pk)
-    return render(request, TASK_VIEW, {'tasks': tasks})
+    return render(request, TASK_VIEW, {'tasks': Tasks.objects.filter(id=pk)})
+
+
+# labels
+
+
+@check_logged_user
+def labels_read(request):
+    return render(request, LABEL_READ, {'labels': Labels.objects.all()})
+
+
+@check_logged_user
+def labels_create(request):
+    if request.method == 'POST':
+        Labels(name=request.POST.get('name')).save()
+        messages.success(request, _('Label created successfully'))
+        return redirect('/labels/')
+
+    return render(request, LABEL_CREATE, {})
+
+
+@check_logged_user
+def labels_delete(request, pk=0):
+    if request.method == 'POST':
+        Labels.objects.filter(id=pk).delete()
+        messages.success(request, _('Label delete successfully'))
+        return redirect('/labels/')
+
+    if len(Tasks.objects.filter(label__in=[pk]).distinct()) > 0:
+        messages.error(request, _('Label have task(s)'))
+        return redirect('/labels/')
+
+    name = Labels.objects.filter(id=pk).all()[0]
+    return render(request, LABEL_DELETE, {'name': name})
+
+
+@check_logged_user
+def labels_update(request, pk=0):
+    labels = Labels.objects.filter(id=pk)
+
+    if request.method == 'POST':
+        try:
+            labels.update(name=request.POST.get('name'))
+        except Exception as e:
+            fields = {'name': request.POST.get('name'), 'error': _('Name already exist')}
+            return render(request, LABEL_UPDATE, fields)
+
+        messages.success(request, _('Label updated successfully'))
+        return redirect('/labels/')
+
+    return render(request, LABEL_UPDATE, {'name': labels.all()[0]})

@@ -24,6 +24,9 @@
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="/statuses/">{% trans 'Statuses' %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/labels/">{% trans 'Labels' %}</a>
                 </li>   
                 <li class="nav-item">
                     <a class="nav-link" href="/tasks/">{% trans 'Tasks' %}</a>
@@ -39,7 +42,7 @@
                 {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="/login/">{% trans 'Enter' %}</a>
-                </li>
+                </li>                
                 <li class="nav-item">
                     <a class="nav-link" href="/users/create/">{% trans 'Registration' %}</a>
                 </li>     
