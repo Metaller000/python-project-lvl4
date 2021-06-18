@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-17 01:51+0300\n"
+"POT-Creation-Date: 2021-06-18 16:36+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,7 +83,7 @@ msgstr "Создать метку"
 #: users/templates/statuses/status_update.html:19
 #: users/templates/tasks/task_create.html:10
 #: users/templates/tasks/task_create.html:11
-#: users/templates/tasks/task_read.html:13
+#: users/templates/tasks/task_read.html:64
 #: users/templates/tasks/task_update.html:12
 #: users/templates/tasks/task_update.html:13
 #: users/templates/tasks/task_update.html:18
@@ -116,13 +116,13 @@ msgstr "Да, удалить"
 
 #: users/templates/labels/label_read.html:12
 #: users/templates/statuses/status_read.html:12
-#: users/templates/tasks/task_read.html:12 users/templates/users/users.html:11
+#: users/templates/tasks/task_read.html:63 users/templates/users/users.html:11
 msgid "ID"
 msgstr "ID"
 
 #: users/templates/labels/label_read.html:14
 #: users/templates/statuses/status_read.html:14
-#: users/templates/tasks/task_read.html:17
+#: users/templates/tasks/task_read.html:68
 #: users/templates/tasks/task_view.html:30
 msgid "Add date"
 msgstr "Дата создания"
@@ -132,7 +132,7 @@ msgstr "Дата создания"
 #: users/templates/registration/create.html:145
 #: users/templates/statuses/status_read.html:25
 #: users/templates/statuses/status_update.html:23
-#: users/templates/tasks/task_read.html:31
+#: users/templates/tasks/task_read.html:82
 #: users/templates/tasks/task_update.html:61
 #: users/templates/tasks/task_view.html:35 users/templates/users/users.html:26
 msgid "Edit"
@@ -140,7 +140,7 @@ msgstr "Изменить"
 
 #: users/templates/labels/label_read.html:27
 #: users/templates/statuses/status_read.html:27
-#: users/templates/tasks/task_read.html:33
+#: users/templates/tasks/task_read.html:84
 #: users/templates/tasks/task_view.html:37 users/templates/users/users.html:28
 msgid "Delete"
 msgstr "Удалить"
@@ -267,14 +267,16 @@ msgid "Description"
 msgstr "Описание"
 
 #: users/templates/tasks/task_create.html:18
-#: users/templates/tasks/task_read.html:14
+#: users/templates/tasks/task_read.html:13
+#: users/templates/tasks/task_read.html:65
 #: users/templates/tasks/task_update.html:27
 #: users/templates/tasks/task_view.html:26
 msgid "Status"
 msgstr "Статус"
 
 #: users/templates/tasks/task_create.html:27
-#: users/templates/tasks/task_read.html:16
+#: users/templates/tasks/task_read.html:24
+#: users/templates/tasks/task_read.html:67
 #: users/templates/tasks/task_update.html:40
 #: users/templates/tasks/task_view.html:22
 msgid "Executor"
@@ -284,7 +286,19 @@ msgstr "Исполнитель"
 msgid "Delete task"
 msgstr "Удалить задачу"
 
-#: users/templates/tasks/task_read.html:15
+#: users/templates/tasks/task_read.html:35
+msgid "Label"
+msgstr "Метка"
+
+#: users/templates/tasks/task_read.html:49
+msgid "Only your tasks"
+msgstr "Только свои задачи"
+
+#: users/templates/tasks/task_read.html:54
+msgid "Show"
+msgstr "Показать"
+
+#: users/templates/tasks/task_read.html:66
 #: users/templates/tasks/task_view.html:18
 msgid "Autor"
 msgstr "Автор"
@@ -357,7 +371,7 @@ msgstr "Статус успешно создан "
 msgid "Status delete successfully"
 msgstr "Статус успешно удалён"
 
-#: users/views.py:169 users/views.py:248 users/views.py:311
+#: users/views.py:169 users/views.py:280 users/views.py:343
 msgid "Name already exist"
 msgstr "Имя уже существует"
 
@@ -365,34 +379,34 @@ msgstr "Имя уже существует"
 msgid "Status updated successfully"
 msgstr "Статус успешно изменён "
 
-#: users/views.py:199
+#: users/views.py:231
 msgid "Task created successfully"
 msgstr "Задача успешно создана"
 
-#: users/views.py:209
+#: users/views.py:241
 msgid "Tasks delete successfully"
 msgstr "Задача успешно удалёна"
 
-#: users/views.py:216
+#: users/views.py:248
 msgid "A task can only be deleted by its author"
 msgstr "Здача может быть удалена только ее автором"
 
-#: users/views.py:252
+#: users/views.py:284
 msgid "Task updated successfully"
 msgstr "Задача успешно изменёна"
 
-#: users/views.py:282
+#: users/views.py:314
 msgid "Label created successfully"
 msgstr "Метка успешно создана"
 
-#: users/views.py:292
+#: users/views.py:324
 msgid "Label delete successfully"
 msgstr "Метка успешно удалёна"
 
-#: users/views.py:296
+#: users/views.py:328
 msgid "Label have task(s)"
 msgstr "У метки есть задача(и)"
 
-#: users/views.py:314
+#: users/views.py:346
 msgid "Label updated successfully"
 msgstr "Метка успешно изменёна"

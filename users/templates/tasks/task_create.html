@@ -17,19 +17,19 @@
         <div class="form-group">
             <label for="id_status">{%trans 'Status'%}</label>
             <select name="status" class="form-control" title="" required="" id="id_status">
-            <option value="" selected="">---------</option>            
-            {% for status in statuses %}            
-                <option value="{{status.id}}">{{status.name}}</option>    
-            {% endfor %}            
+                <option value="" selected="">---------</option>            
+                {% for status in statuses %}            
+                    <option value="{{status.id}}">{{status.name}}</option>    
+                {% endfor %}            
             </select>
         </div>
         <div class="form-group">
             <label for="id_executor">{%trans 'Executor'%}</label>
             <select name="executor" class="form-control" title="" id="id_executor">
-            <option value="" selected="">---------</option>
-            {% for user in users %}            
-                <option value="{{user.id}}">{{ user.first_name }} {{ user.last_name }}</option>    
-            {% endfor %}    
+                <option value="" selected="">---------</option>
+                {% for user in users %}            
+                    <option value="{{user.id}}">{{ user.first_name }} {{ user.last_name }}</option>    
+                {% endfor %}    
             </select>
         </div>
         <div class="form-group">

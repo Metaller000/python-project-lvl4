@@ -179,7 +179,39 @@ def statuses_update(request, pk=0):
 
 @check_logged_user
 def tasks_read(request):
-    return render(request, TASK_READ, {'tasks': Tasks.objects.all()})
+    nvl = lambda a, b: b if a is None else a
+    autor = request.user.username if request.GET.get('self_tasks') == 'on' else ''
+    status = Statuses.objects.filter(id__contains=nvl(request.GET.get('status'), ''))
+    user = User.objects.filter(id__contains=nvl(request.GET.get('executor'), ''))
+    labels = nvl(request.GET.get('label'), '')
+    label = Labels.objects.filter(id__contains=labels)
+
+    if labels == '':
+        tasks = Tasks.objects.filter(
+            autor__contains=autor
+        ).filter(
+            status__in=status
+        ).filter(
+            user__in=user
+        ).all()
+    else:
+        tasks = Tasks.objects.filter(
+            autor__contains=autor
+        ).filter(
+            status__in=status
+        ).filter(
+            user__in=user
+        ).filter(
+            label__in=label
+        ).distinct().all()
+
+    tables = {
+        'tasks': tasks,
+        'statuses': Statuses.objects.all(),
+        'users': User.objects.all(),
+        'labels': Labels.objects.all(),
+    }
+    return render(request, TASK_READ, tables)
 
 
 @check_logged_user
@@ -237,7 +269,7 @@ def tasks_update(request, pk=0):
             task.save()
             for label in request.POST.getlist('labels'):
                 task.label.add(Labels.objects.get(id=label))
-          
+
         except Exception as e:
             print(e)
             fields = {
