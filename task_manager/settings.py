@@ -34,7 +34,7 @@ DEBUG = False
 if os.getenv('DEBUG', '').lower() in ['true', 'yes', 'ok', '1']:
     DEBUG = True
 
-ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
