@@ -179,7 +179,7 @@ def statuses_update(request, pk=0):
 
 @check_logged_user
 def tasks_read(request):
-    nvl = lambda a, b: b if a is None else a
+    def nvl(a, b): return b if a is None else a
     autor = request.user.username if request.GET.get('self_tasks') == 'on' else ''
     status = Statuses.objects.filter(id__contains=nvl(request.GET.get('status'), ''))
     user = User.objects.filter(id__contains=nvl(request.GET.get('executor'), ''))

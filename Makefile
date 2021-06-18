@@ -27,4 +27,6 @@ run: message_update lang_compale migrate runserver
 
 message_update:
 	poetry run python3 manage.py makemessages --all
-	
+
+shell:
+	poetry run python3 manage.py shell

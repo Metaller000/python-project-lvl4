@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import rollbar
 import os
 
 from dotenv import load_dotenv
@@ -57,7 +58,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 ]
+
+ROLLBAR = {
+    'access_token': os.getenv('ACCESS_TOKEN', '***'),
+    'environment': 'development' if DEBUG else 'production',
+    'root': BASE_DIR,
+}
+rollbar.init(**ROLLBAR)
 
 ROOT_URLCONF = 'task_manager.urls'
 
