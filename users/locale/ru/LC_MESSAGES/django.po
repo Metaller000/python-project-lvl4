@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 16:57+0300\n"
+"POT-Creation-Date: 2021-06-21 11:18+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,10 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
-
-#: task_manager/settings.py:132
-msgid "English"
-msgstr "English"
 
 #: task_manager/settings.py:133
 msgid "Russian"
@@ -43,6 +39,7 @@ msgstr "Статусы"
 #: users/templates/base.html:29 users/templates/labels/label_read.html:7
 #: users/templates/tasks/task_create.html:36
 #: users/templates/tasks/task_update.html:53
+#: users/templates/tasks/task_view.html:35
 msgid "Labels"
 msgstr "Метки"
 
@@ -134,14 +131,14 @@ msgstr "Дата создания"
 #: users/templates/statuses/status_update.html:23
 #: users/templates/tasks/task_read.html:82
 #: users/templates/tasks/task_update.html:61
-#: users/templates/tasks/task_view.html:35 users/templates/users/users.html:26
+#: users/templates/tasks/task_view.html:45 users/templates/users/users.html:26
 msgid "Edit"
 msgstr "Изменить"
 
 #: users/templates/labels/label_read.html:27
 #: users/templates/statuses/status_read.html:27
 #: users/templates/tasks/task_read.html:84
-#: users/templates/tasks/task_view.html:37 users/templates/users/users.html:28
+#: users/templates/tasks/task_view.html:47 users/templates/users/users.html:28
 msgid "Delete"
 msgstr "Удалить"
 
@@ -410,3 +407,6 @@ msgstr "У метки есть задача(и)"
 #: users/views.py:346
 msgid "Label updated successfully"
 msgstr "Метка успешно изменёна"
+
+#~ msgid "English"
+#~ msgstr "English"

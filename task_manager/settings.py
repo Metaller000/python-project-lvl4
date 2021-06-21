@@ -129,7 +129,7 @@ def ugettext(s):
 
 
 LANGUAGES = (
-    ('en', _('English')),
+    # ('en', _('English')),
     ('ru', _('Russian')),
 )
 
@@ -137,7 +137,7 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'users/locale'),
 )
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Europe/Moscow'
 
