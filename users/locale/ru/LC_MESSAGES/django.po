@@ -322,11 +322,11 @@ msgstr "Дата создания"
 
 #: users/views.py:39
 msgid "You are logged in"
-msgstr "Вы залогиненны"
+msgstr "Вы залогинены"
 
 #: users/views.py:43
 msgid "You are logged out"
-msgstr "Вы разлогиненны"
+msgstr "Вы разлогинены"
 
 #: users/views.py:47
 msgid ""
